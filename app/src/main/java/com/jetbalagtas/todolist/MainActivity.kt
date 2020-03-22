@@ -1,5 +1,6 @@
 package com.jetbalagtas.todolist
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -20,6 +21,14 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, CreateToDo::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        var prefs = getSharedPreferences(getString(R.string.SHARED_PREF_NAME), Context.MODE_PRIVATE)
+        var todos = prefs.getStringSet(getString(R.string.TODO_STRINGS), setOf())?.toMutableSet()
+        println(todos)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
